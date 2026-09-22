@@ -1,0 +1,136 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "mpremote connect auto",
+            "type": "shell",
+            "command": "mpremote connect auto"
+        },
+        {
+            "label": "mpremote list devices",
+            "type": "shell",
+            "command": "mpremote connect list",
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote soft reset",
+            "type": "shell",
+            "command": "mpremote soft-reset",
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote stop script on device",
+            "type": "shell",
+            "command": "mpremote soft-reset",
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote repl",
+            "type": "shell",
+            "command": "mpremote repl",
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote copy active file to device",
+            "type": "shell",
+            "command": "mpremote fs cp ${relativeFile} :${relativeFile}",
+            
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote copy file to device",
+            "type": "shell",
+            "command": "mpremote fs cp ${input:filename} :${input:filename}",
+            
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote copy all Python files to device",
+            "type": "shell",
+            "command": "mpremote fs cp @(Get-ChildItem -File -Filter '*.py' | Select-Object -ExpandProperty FullName) :",
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote run active file",
+            "type": "shell",
+            "command": "mpremote run ${relativeFile}",
+            
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote list device files",
+            "type": "shell",
+            "command": "mpremote fs ls",
+            
+            "problemMatcher": []
+        },
+        {
+            "label": "mpremote delete all files on device",
+            "type": "shell",
+            "command": "mpremote rm -rv :/",
+            
+            "problemMatcher": []
+        },
+        
+    ],
+    "inputs": [
+    {
+      "id": "filename",
+      "type": "promptString",
+      "description": "Filename: "
+    }
+  ]
+}
+
+/*
+List of commands:
+  connect     connect to given device
+  disconnect  disconnect current device
+  edit        edit files on the device
+  eval        evaluate and print the string
+  exec        execute the string
+  fs          execute filesystem commands on the device
+  help        print help and exit
+  mip         install packages from micropython-lib or third-party sources
+  mount       mount local directory on device
+  repl        connect to given device
+  resume      resume a previous mpremote session (will not auto soft-reset)
+  romfs       manage ROM partitions
+  rtc         get (default) or set the device RTC
+  run         run the given local script
+  sleep       sleep before executing next command
+  soft-reset  perform a soft-reset of the device
+  umount      unmount the local directory
+  version     print version and exit
+
+List of shortcuts:
+  --help      
+  --version   
+  a0          connect to serial port "/dev/ttyACM0"
+  a1          connect to serial port "/dev/ttyACM1"
+  a2          connect to serial port "/dev/ttyACM2"
+  a3          connect to serial port "/dev/ttyACM3"
+  bootloader  make the device enter its bootloader
+  c0          connect to serial port "COM0"
+  c1          connect to serial port "COM1"
+  c2          connect to serial port "COM2"
+  c3          connect to serial port "COM3"
+  cat         
+  cp          
+  devs        list available serial ports
+  df          
+  ls          
+  mkdir       
+  reset       hard reset the device
+  rm          
+  rmdir       
+  sha256sum   
+  touch       
+  tree        
+  u0          connect to serial port "/dev/ttyUSB0"
+  u1          connect to serial port "/dev/ttyUSB1"
+  u2          connect to serial port "/dev/ttyUSB2"
+  u3          connect to serial port "/dev/ttyUSB3"
+*/
