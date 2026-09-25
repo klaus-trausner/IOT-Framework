@@ -3,11 +3,17 @@ import wifi_manager
 import mqtt_manager
 import config
 import wdt_manager
+import ota_updater
 import time
 
 def handle_incoming_mqtt(topic, msg): 
     """Wird aufgerufen, wenn eine abonnierte Nachricht eintrifft.""" 
     print(f"🔔 MAIN verarbeitet Nachricht: {topic} -&gt; {msg}")
+    if topic == f"esp32/cmd/ota/{config.OTA_NAME}":
+        download_url =msg.strip()
+        print(f"🚀 OTA-Update angefordert! URL: {download_url}")
+
+        ota_updater.update_file(download_url)
 
 async def test_sender():
     zaehler = 0
