@@ -1,6 +1,7 @@
 import network
 import asyncio
 import wdt_manager
+import webrepl
 
 # Globale Events  &  Status
 wifi_connected_event = asyncio.Event()
@@ -28,6 +29,15 @@ async def connect_wifi(ssid, password, check_interval=5):
             if wlan.isconnected():
                 print(f"✅ WLAN verbunden! IP: {wlan.ifconfig()[0]}")
                 wifi_connected_event.set()
+
+                # WebREPL-Server über WLAN starten 
+                try: 
+                    webrepl.start() 
+                    print("🌐 WebREPL gestartet!") 
+                except Exception as e: 
+                    print(f"⚠️ WebREPL Fehler: {e}")
+
+
             else:
                 print("❌ WLAN-Verbindung fehlgeschlagen. Nächster Versuch in Kürze...")
 

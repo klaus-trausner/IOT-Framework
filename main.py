@@ -1,10 +1,15 @@
+import time
+print("Ich warte 3 Sekunden....")
+time.sleep(3)
+print("Starte jetzt!")
+
 import asyncio
 import wifi_manager
 import mqtt_manager
 import config
 import wdt_manager
 import ota_updater
-import time
+
 
 def handle_incoming_mqtt(topic, msg): 
     """Wird aufgerufen, wenn eine abonnierte Nachricht eintrifft.""" 

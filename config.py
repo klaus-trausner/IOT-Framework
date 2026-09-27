@@ -14,8 +14,8 @@ MQTT_PASS = "DHisddS!"
 SUBSCRIPTIONS = ["esp32/zisterne", 
                  "esp32/temperature", 
                  "esp32/pressure", 
-                 "esp32/humidity"
-                 "esp32/cmd/*", 
+                 "esp32/humidity",
+                 "esp32/cmd/#", 
                  "bodenfeuchte", 
                  "steuerungstemperatur", 
                  "status", 

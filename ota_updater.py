@@ -3,16 +3,24 @@ import requests
 from machine import reset
 
 def update_file(url, target_filename=None):
-    
+    clean_url = url.split("?")[0]
+    print(f"clean_url: {clean_url}")   
+
+    # 2\. Automatischer Umbau von normalen GitHub-Links zu RAW-Links
+    if "github.com" in clean_url and "/blob/" in clean_url: 
+        clean_url = clean_url.replace( "github.com", "raw.githubusercontent.com" ).replace("/blob/", "/") 
+        print(f"🔄 GitHub-Link auf RAW umgestellt: {clean_url}")
+
     if not target_filename:
-        clean_url = url.split("?")[0]
-        target_filename = clean_url.split("/"[-1])
+        
+        target_filename = clean_url.split("/")[-1]
+        print(f"target_filename: {target_filename}")
 
     temp_filename = target_filename + ".tmp"
     print(f"📥 OTA: Lade '{target_filename}' von '{url}' herunter..." )
 
     try:
-        response = requests.get(url)
+        response = requests.get(clean_url)
 
         if response.status_code == 200:
             with open(temp_filename, "w") as f:
