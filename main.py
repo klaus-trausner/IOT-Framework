@@ -19,6 +19,10 @@ def handle_incoming_mqtt(topic, msg):
         print(f"🚀 OTA-Update angefordert! URL: {download_url}")
 
         ota_updater.update_file(download_url)
+    elif topic == f"esp32/cmd/ip/{config.OTA_NAME}":
+        payload = f"{config.OTA_NAME}: {wifi_manager.IP_adress}"
+        print(payload)
+        asyncio.create_task(mqtt_manager.publish("status", payload))
 
 async def test_sender():
     zaehler = 0

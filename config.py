@@ -2,6 +2,8 @@
 WIFI_SSID = "ZTE_9F7AC2"
 WIFI_PASS = "6LE66868TE"
 
+DEVICE_HOSTNAME = "IOT_Framework_standard" # Keine Leerzeichen oder Sonderzeichen verwenden!
+
 OTA_NAME = "myname"
 
 

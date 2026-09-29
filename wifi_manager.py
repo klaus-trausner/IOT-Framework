@@ -1,6 +1,7 @@
 import network
 import asyncio
 import wdt_manager
+import config
 
 try: 
     import webrepl 
@@ -10,9 +11,18 @@ except ImportError:
 
 # Globale Events  &  Status
 wifi_connected_event = asyncio.Event()
+IP_adress = None
 
 async def connect_wifi(ssid, password, check_interval=5):
+    global IP_adress
     wlan = network.WLAN(network.STA_IF)
+
+    # 1\. Hostname setzen (für neuere MicroPython-Versionen ab v1.20
+    try: 
+        network.hostname(config.DEVICE_HOSTNAME) 
+    except (AttributeError, TypeError): 
+        pass
+
     wlan.active(True)
 
     print("📶 WLAN Manager gestartet...")
@@ -32,7 +42,9 @@ async def connect_wifi(ssid, password, check_interval=5):
                 timeout -= 1
 
             if wlan.isconnected():
-                print(f"✅ WLAN verbunden! IP: {wlan.ifconfig()[0]}")
+                IP_adress = wlan.ifconfig()[0]
+                print(f"✅ WLAN verbunden! IP: {IP_adress}")
+                
                 wifi_connected_event.set()
 
                 # WebREPL-Server über WLAN starten 
